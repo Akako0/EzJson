@@ -10,7 +10,8 @@ class Json:
         self.file_path = file_path
         self.exists = Path(file_path).exists()
         self.file_name = Path(file_path).name
-        if self.exists: self.empty = not Path(file_path).stat().st_size
+        self.file_size = Path(file_path).stat().st_size
+        if self.file_size != 0: self.empty = False
         else:   self.empty = True
         #* Warn if file doesn't exist
         if not self.exists:
@@ -41,12 +42,13 @@ class Json:
         
     def update (self) -> bool:
         """
-        Update the class attributes
+        Update file informations
         Arguments: None
         """
         self.exists = Path(self.file_path).exists()
         self.file_name = Path(self.file_path).name
-        if self.exists: self.empty = not Path(self.file_path).stat().st_size
+        self.file_size = Path(file_path).stat().st_size
+        if self.file_size != 0: self.empty = False
         else:   self.empty = True
     
     def create (self) -> bool:
